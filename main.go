@@ -94,12 +94,6 @@ func main() {
 			select {
 			case event := <-w.Event:
 
-				if open, _ := os.Open(outputBinary); open != nil {
-					if err := os.Remove(outputBinary); err != nil {
-						logger.Printf("%sError running: %v%s\n", colorRed, err, colorReset)
-					}
-				}
-
 				if !event.IsDir() {
 
 					if event.Path != "-" && event.FileInfo.Name() != "" {
@@ -109,6 +103,14 @@ func main() {
 					if runCmd != nil && runCmd.Process != nil {
 						if err := runCmd.Process.Signal(os.Kill); err != nil {
 							logger.Printf("%sError killing previous process %v%s\n", colorRed, err, colorReset)
+							continue
+						}
+					}
+
+					if open, _ := os.Open(outputBinary); open != nil {
+						if err := os.Remove(outputBinary); err != nil {
+							logger.Printf("%sError running: %v%s\n", colorRed, err, colorReset)
+							continue
 						}
 					}
 
