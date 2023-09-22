@@ -1,4 +1,4 @@
-module goir
+module github.com/gokul1630/goir
 
 go 1.21.1
 
