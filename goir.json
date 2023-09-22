@@ -1,0 +1,7 @@
+{
+	"output":"main",
+	"buildArgs":[],
+	"runArgs":[],
+	"excludedPaths":["tmp"],
+	"tmp_dir":"tmp"
+}
