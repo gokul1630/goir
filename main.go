@@ -89,6 +89,12 @@ func main() {
 		log.Fatalln(err)
 	}
 
+	if open, _ := os.Open(outputBinary); open != nil {
+		if err := os.RemoveAll(outputBinary); err != nil {
+			logger.Printf("%sError removing: %v%s\n", colorRed, err, colorReset)
+		}
+	}
+
 	go func() {
 		for {
 			select {
@@ -109,7 +115,7 @@ func main() {
 
 					if open, _ := os.Open(outputBinary); open != nil {
 						if err := os.Remove(outputBinary); err != nil {
-							logger.Printf("%sError running: %v%s\n", colorRed, err, colorReset)
+							logger.Printf("%sError removing: %v%s\n", colorRed, err, colorReset)
 							continue
 						}
 					}
