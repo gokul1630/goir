@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"os"
 	"os/exec"
@@ -26,7 +27,7 @@ func main() {
 	cyanColor := "\033[36m"
 	colorReset := "\033[0m"
 
-	logger := log.New(os.Stdout, "", 0)
+	logger := log.New(os.Stdout, "[GOIR] ", 0)
 	w := watcher.New()
 	var config Config
 
@@ -71,7 +72,7 @@ func main() {
 
 	w.IgnoreHiddenFiles(true)
 
-	logger.Printf("%s%s%s",
+	fmt.Printf("%s%s%s",
 
 		cyanColor,
 
