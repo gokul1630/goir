@@ -35,3 +35,7 @@ export PATH="$(go env GOPATH)/bin:$PATH"
 - kill child processes
 - refactor code
 - more customization
+
+## Thanks to
+- [cosmtrek](https://github.com/cosmtrek/air)
+- [radovskyb](https://github.com/radovskyb/watcher)
