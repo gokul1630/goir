@@ -91,6 +91,7 @@ func main() {
 	}
 
 	if open, _ := os.Open(outputBinary); open != nil {
+		open.Close()
 		if err := os.RemoveAll(outputBinary); err != nil {
 			logger.Printf("%sError removing: %v%s\n", colorRed, err, colorReset)
 		}
