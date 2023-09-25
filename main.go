@@ -81,7 +81,7 @@ func main() {
 			"██║  ██╗ ██║  ██║██║██████╔╝\n"+
 			"██║  ╚██╗██║  ██║██║██╔══██╗\n"+
 			"╚██████╔╝╚█████╔╝██║██║  ██║\n"+
-			" ╚═════╝  ╚════╝ ╚═╝╚═╝  ╚═╝ written in go v0.0.5-beta \n", colorReset)
+			" ╚═════╝  ╚════╝ ╚═╝╚═╝  ╚═╝ written in go v0.0.6-beta \n", colorReset)
 
 	r := regexp.MustCompile(".go$")
 	w.AddFilterHook(watcher.RegexFilterHook(r, false))
