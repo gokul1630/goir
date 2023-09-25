@@ -114,13 +114,6 @@ func main() {
 						}
 					}
 
-					if open, _ := os.Open(outputBinary); open != nil {
-						if err := os.Remove(outputBinary); err != nil {
-							logger.Printf("%sError removing: %v%s\n", colorRed, err, colorReset)
-							continue
-						}
-					}
-
 					logger.Printf("%sBuilding...%s\n", colorGreen, colorReset)
 
 					buildCmd := exec.Command("go", config.BuildArgs...)
