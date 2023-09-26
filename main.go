@@ -27,7 +27,7 @@ func main() {
 	cyanColor := "\033[36m"
 	colorReset := "\033[0m"
 
-	logger := log.New(os.Stdout, "[GOIR] ", 0)
+	logger := log.New(os.Stdout, "[GOIR] ", log.LstdFlags)
 	w := watcher.New()
 	var config Config
 
