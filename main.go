@@ -62,6 +62,11 @@ func main() {
 		}
 	}
 
+	args := os.Args
+	if len(args) > 1 {
+		config.RunArgs = append(config.RunArgs, args[1:]...)
+	}
+
 	config.BuildArgs = append([]string{"build", "-o", outputBinary}, config.BuildArgs...)
 
 	w.SetMaxEvents(1)
