@@ -14,11 +14,11 @@ go install github.com/gokul1630/goir@latest
 export PATH="$(go env GOPATH)/bin:$PATH"
 ```
 
-### If you're running on Windows add the `go/bin` path to your `PATH` variable in Environmental variables
+### If you're running on Windows add the `go/bin` path to your `PATH` variable in Environment variables
 
 
 ## Config for customization
-> Note: Config is optional only. You can run goir without any config. If you want to customize, below are the available options.
+> Note: Config is optional only. You can run goir without any config. If you want to customize, below are the available options. also you can give optional run args by `goir <your args>`.
 
 ```
 {
