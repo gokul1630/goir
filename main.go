@@ -102,7 +102,7 @@ func main() {
 		}
 	}
 
-	pids := make([]int, 0)
+	pids := make(map[int]string, 0)
 
 	go func() {
 		for {
@@ -123,12 +123,13 @@ func main() {
 							}
 						}
 					} else {
-						for _, pid := range pids {
+						for pid := range pids {
 							kill := exec.Command("taskkill", "/pid", fmt.Sprint(pid), "/T", "/F")
 							if err := kill.Run(); err != nil {
 								logger.Printf("%sError killing previous process %v%s\n", colorRed, err, colorReset)
 								continue
 							}
+							delete(pids, pid)
 						}
 					}
 
@@ -152,7 +153,7 @@ func main() {
 					}
 
 					if !isLinux {
-						pids = append(pids, runCmd.Process.Pid)
+						pids[runCmd.Process.Pid] = ""
 					}
 
 					logger.Printf("%sStarted serving...%s\n\n", colorGreen, colorReset)
