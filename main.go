@@ -102,6 +102,8 @@ func main() {
 		}
 	}
 
+	pids := make([]int, 0)
+
 	go func() {
 		for {
 			select {
@@ -113,10 +115,20 @@ func main() {
 						logger.Printf("%s%s has changed%s\n", cyanColor, event.FileInfo.Name(), colorReset)
 					}
 
-					if runCmd != nil && runCmd.Process != nil {
-						if err := runCmd.Process.Signal(os.Kill); err != nil {
-							logger.Printf("%sError killing previous process %v%s\n", colorRed, err, colorReset)
-							continue
+					if isLinux {
+						if runCmd != nil && runCmd.Process != nil {
+							if err := runCmd.Process.Signal(os.Kill); err != nil {
+								logger.Printf("%sError killing previous process %v%s\n", colorRed, err, colorReset)
+								continue
+							}
+						}
+					} else {
+						for _, pid := range pids {
+							kill := exec.Command("taskkill", "/pid", fmt.Sprint(pid), "/T", "/F")
+							if err := kill.Run(); err != nil {
+								logger.Printf("%sError killing previous process %v%s\n", colorRed, err, colorReset)
+								continue
+							}
 						}
 					}
 
@@ -138,6 +150,11 @@ func main() {
 						logger.Printf("%sError running: %v%s\n", colorRed, err, colorReset)
 						continue
 					}
+
+					if !isLinux {
+						pids = append(pids, runCmd.Process.Pid)
+					}
+
 					logger.Printf("%sStarted serving...%s\n\n", colorGreen, colorReset)
 				}
 
